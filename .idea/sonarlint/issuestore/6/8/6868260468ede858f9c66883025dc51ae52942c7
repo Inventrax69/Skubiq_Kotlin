@@ -1,0 +1,50 @@
+
+U
+java:S1118"":Add a private constructor to hide the implicit public one.(ÖÍ’ƒÿÿÿÿÿ
+O
+java:S18743"9Remove this use of "getConnectionInfo"; it is deprecated.(´ š¤
+h
+java:S37769"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(»ÁØô
+Q	java:S125A"<This block of commented-out lines of code should be removed.(ù’ÕÜ
+>	java:S108P")Either remove or fill this block of code.(Ó™±Ÿ
+I
+java:S1874U".Remove this use of "SERIAL"; it is deprecated.(Ë†„¤ÿÿÿÿÿ
+P
+java:S1128"5Remove this unused import 'android.accounts.Account'.(×ÓýÓøÿÿÿÿ
+W
+java:S1128"<Remove this unused import 'android.accounts.AccountManager'.(•„Ð‹ÿÿÿÿÿ
+M
+java:S1128"8Remove this unused import 'android.app.ActivityManager'.(•è‡`
+Z
+java:S1128"?Remove this unused import 'android.content.pm.ApplicationInfo'.(‰­üÿÿÿÿ
+V
+java:S1128	";Remove this unused import 'android.content.pm.PackageInfo'.(¡«³óüÿÿÿÿ
+Y
+java:S1128
+">Remove this unused import 'android.content.pm.PackageManager'.(€®¥õÿÿÿÿÿ
+o
+java:S1128"TRemove this unused import 'android.content.pm.PackageManager.NameNotFoundException'.(ð½ÞÐýÿÿÿÿ
+N
+java:S1128"3Remove this unused import 'android.os.Environment'.(É¿‹Ãûÿÿÿÿ
+D
+java:S1128".Remove this unused import 'android.os.StatFs'.(ÆÅÆÝ
+N
+java:S1128"8Remove this unused import 'android.provider.MediaStore'.(ãçšþ
+X
+java:S1128"=Remove this unused import 'android.provider.Settings.Secure'.( ŸÙíøÿÿÿÿ
+T
+java:S1128"?Remove this unused import 'android.telephony.TelephonyManager'.(Ìâû1
+H
+java:S1128"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ
+I
+java:S1128".Remove this unused import 'android.view.View'.(Ø½­äþÿÿÿÿ
+M
+java:S1128"7Remove this unused import 'android.view.WindowManager'.(Ü³‹Å
+c
+java:S1128"HRemove this unused import 'android.view.inputmethod.InputMethodManager'.(‰­àûÿÿÿÿ
+L
+java:S1128"6Remove this unused import 'android.widget.ScrollView'.(êÑ†é
+Y
+java:S1128">Remove this unused import 'androidx.appcompat.widget.Toolbar'.(ÔËûÝùÿÿÿÿ
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ

@@ -1,0 +1,9 @@
+
+6kotlin:S125"Remove this commented out code.(‡Ôİ
+@kotlin:S108&")Either remove or fill this block of code.(å¥‡
+Ikotlin:S14813",Remove this unused "errorBd" local variable.(Î³À®üÿÿÿÿ
+7kotlin:S1128
+"Remove this unused import.(’—ÄÑùÿÿÿÿ
+Fkotlin:S1066".Merge this "if" statement with the nested one.(îÿú
+`kotlin:S65106"CMove "return" statements from all branches before "when" statement.(Ö¦§çıÿÿÿÿ
+Zkotlin:S6511C"=Merge chained "if" statements into a single "when" statement.(¡ËÏ´úÿÿÿÿ

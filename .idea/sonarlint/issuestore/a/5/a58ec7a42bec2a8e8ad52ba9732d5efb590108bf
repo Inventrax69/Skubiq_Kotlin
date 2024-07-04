@@ -1,0 +1,46 @@
+
+E
+java:S3740"/Provide the parametrized type for this generic.(¶€Ä±
+J
+java:S3740"/Provide the parametrized type for this generic.(®æ‡‘şÿÿÿÿ
+E
+java:S3740""/Provide the parametrized type for this generic.(‘ğ‘Ñ
+J
+java:S3740B"/Provide the parametrized type for this generic.(ºŸÁíıÿÿÿÿ
+E
+java:S3740J"/Provide the parametrized type for this generic.(ÔÑö¨
+E
+java:S3740J"/Provide the parametrized type for this generic.(ÔÑö¨
+E
+java:S3740o"/Provide the parametrized type for this generic.(ÔÑö¨
+E
+java:S3740o"/Provide the parametrized type for this generic.(ÔÑö¨
+E
+java:S1066U"/Merge this if statement with the enclosing one.(¹¼µÑ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(à—Ïõ
+i
+java:S2259b"NA "NullPointerException" could be thrown; "scanForActivity()" can return null.(®á“ üÿÿÿÿ
+m	java:S116"SRename this field "_context" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú§Ğşÿÿÿÿ
+k	java:S116"QRename this field "_items" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®æ‡‘şÿÿÿÿ
+z	java:S116"`Rename this field "_searchableListDialog" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈÛ©¹şÿÿÿÿ
+m	java:S116!"SRename this field "_isDirty" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾€Ó°øÿÿÿÿ
+m	java:S116""XRename this field "_arrayAdapter" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘ğ‘Ñ
+q	java:S116#"WRename this field "_strHintText" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºš¾üÿÿÿÿ
+k	java:S116$"VRename this field "_isFromInit" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü»–Å
+E
+java:S1948"*Make "_context" transient or serializable.(Ú§Ğşÿÿÿÿ
+C
+java:S1948"(Make "_items" transient or serializable.(®æ‡‘şÿÿÿÿ
+R
+java:S1948"7Make "_searchableListDialog" transient or serializable.(ÈÛ©¹şÿÿÿÿ
+E
+java:S1948""/Make "_arrayAdapter" transient or serializable.(‘ğ‘Ñ
+J
+java:S2055"/Add a no-arg constructor to "AppCompatSpinner".(‚íØïøÿÿÿÿ
+E
+java:S1874a"/Remove this use of "isAdded"; it is deprecated.(‘ÓîÌ
+G
+java:S1874b",Remove this use of "show"; it is deprecated.(®á“ üÿÿÿÿ
+U
+java:S1874b":Remove this use of "getFragmentManager"; it is deprecated.(®á“ üÿÿÿÿ
+W	java:S125‡"<This block of commented-out lines of code should be removed.(‹ ø½şÿÿÿÿ

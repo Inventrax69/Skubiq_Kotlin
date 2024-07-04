@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragments.GoodsInFragment">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/ashblack">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/lblStoreRefNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_weight="0.6"
+                    android:textColor="@color/black"
+                    android:text="@string/storeRefNo"
+                    android:textSize="@dimen/_8ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lblInboundQty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="1.4"
+                    android:gravity="end"
+                    android:text="@string/tv_inbound_qty"
+                    android:textColor="@color/pink"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/lblStoreRefNo"
+                    app:layout_constraintBottom_toBottomOf="@id/lblStoreRefNo"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_pallet"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".4"
+                    android:text="@string/pallet_no"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintStart_toStartOf="@id/lblStoreRefNo"
+                    app:layout_constraintTop_toBottomOf="@id/lblStoreRefNo"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/lblPalletNo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".7"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@id/tv_pallet"
+                    app:layout_constraintTop_toTopOf="@id/tv_pallet"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_pallet"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_pallet_weight"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="@string/pallet_net_wt"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintStart_toStartOf="@id/lblStoreRefNo"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pallet"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lblPalletNetWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".4"
+                    android:textStyle="bold"
+                    android:gravity="start|center"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintStart_toEndOf="@id/tv_pallet_weight"
+                    app:layout_constraintTop_toTopOf="@id/tv_pallet_weight"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_pallet_weight"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/tv_pallet_volume"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:gravity="center|end"
+                    app:layout_constraintTop_toTopOf="@id/lblPalletNetWeight"
+                    app:layout_constraintBottom_toBottomOf="@id/lblPalletNetWeight"
+                    app:layout_constraintEnd_toStartOf="@id/lblPalletHt"
+                    android:text="@string/pallet_height"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/lblPalletHt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".4"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="end|center"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="@id/tv_pallet_volume"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_pallet_volume"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/tv_dock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".3"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbldock"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintStart_toStartOf="@id/lblStoreRefNo"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pallet_weight"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lblDock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".8"
+                    android:gravity="center_vertical"
+                    android:text="@string/tv_dock_value"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_dock"
+                    app:layout_constraintStart_toEndOf="@id/tv_dock"
+                    app:layout_constraintTop_toTopOf="@id/tv_dock"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_dock_scanner"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_dock"
+                    app:layout_constraintEnd_toStartOf="@id/card_pallet_scanner"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/dock"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/dock_cancel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                           
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:contentDescription="@string/image_content_description"
+                            app:layout_constraintStart_toEndOf="@+id/tv_title"
+                            app:layout_constraintTop_toTopOf="@id/tv_title"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+                            android:src="@drawable/ic_outlinedcircle" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvScanDock"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:cardBackgroundColor="@color/locationColor"
+                            app:cardCornerRadius="20dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:cardElevation="0dp">
+
+                            <ImageView
+                                android:id="@+id/ivScanDock"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/image_content_description"
+                                android:background="@drawable/qr3" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <View
+                            android:id="@+id/view_bottom"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_15sdp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cvScanDock"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:background="@color/lite_loc_background"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_pallet_scanner"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/card_dock_scanner"
+                    app:layout_constraintTop_toTopOf="@+id/card_dock_scanner"
+                    app:layout_constraintBottom_toBottomOf="@id/card_dock_scanner"
+                    app:layout_constraintEnd_toStartOf="@id/card_sku"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/white">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_card_pallet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/pallet"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/pallet_cancel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                           
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:contentDescription="@string/image_content_description"
+                            app:layout_constraintStart_toEndOf="@+id/tv_card_pallet"
+                            app:layout_constraintTop_toTopOf="@id/tv_card_pallet"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_card_pallet"
+                            android:src="@drawable/ic_outlinedcircle" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvScanPallet"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:cardBackgroundColor="@color/pallet_color"
+                            app:cardCornerRadius="20dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_card_pallet"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:cardElevation="0dp">
+
+                            <ImageView
+                                android:id="@+id/ivScanPallet"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/image_content_description"
+                                android:background="@drawable/qr3" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <View
+                            android:id="@+id/view_bottom_card_pallet"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_15sdp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cvScanPallet"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:background="@color/lite_pallet_background"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_sku"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/card_pallet_scanner"
+                    app:layout_constraintTop_toTopOf="@id/card_pallet_scanner"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/card_pallet_scanner"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardBackgroundColor="@color/white">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_title_card_sku"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/sku"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/sku_cancel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                           
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:contentDescription="@string/image_content_description"
+                            app:layout_constraintStart_toEndOf="@+id/tv_title_card_sku"
+                            app:layout_constraintTop_toTopOf="@id/tv_title_card_sku"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_title_card_sku"
+                            android:src="@drawable/ic_outlinedcircle" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvScanSKU"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:cardBackgroundColor="@color/skuColor"
+                            app:cardCornerRadius="20dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_title_card_sku"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:cardElevation="0dp">
+
+                            <ImageView
+                                android:id="@+id/ivScanSKU"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/image_content_description"
+                                android:background="@drawable/qr3" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <View
+                            android:id="@+id/view_bottom_card_sku"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_15sdp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cvScanSKU"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:background="@color/lite_sku_background"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+                
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_sku_desc"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_view_top"
+        app:layout_constraintBottom_toTopOf="@id/til_batch"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etSKUDesc"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="text"
+            android:hint="@string/hintSKUdesc"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="@dimen/_10ssp"
+            android:editable="false"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_batch"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/til_sku_desc"
+        app:layout_constraintTop_toBottomOf="@id/til_sku_desc"
+        app:layout_constraintBottom_toTopOf="@id/til_mfg_date"
+       >
+
+        <EditText
+            android:id="@+id/et_batch"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="true"
+            android:enabled="false"
+            android:hint="@string/hintBatch"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="@dimen/_11ssp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.example.skubiq_kotlin.searchableSpinner.SearchableSpinner
+        android:id="@+id/spinner_select_sloc"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        app:layout_constraintTop_toTopOf="@id/til_batch"
+        app:layout_constraintStart_toEndOf="@id/til_batch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/til_batch"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_mfg_date"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/til_batch"
+        app:layout_constraintTop_toBottomOf="@id/til_batch"
+        app:layout_constraintBottom_toTopOf="@id/til_serial_no"
+       >
+
+        <EditText
+            android:id="@+id/etMfgDate"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="none"
+            android:enabled="false"
+            android:hint="@string/hintMfgDate"
+            android:inputType="date"
+            android:singleLine="true"
+            android:textSize="@dimen/_11ssp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_exp_date"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/til_mfg_date"
+        app:layout_constraintTop_toTopOf="@id/til_mfg_date"
+        app:layout_constraintBottom_toBottomOf="@id/til_mfg_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+       >
+
+        <EditText
+            android:id="@+id/etExpDate"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="text"
+            android:enabled="false"
+            android:hint="@string/hintExpDate"
+            android:inputType="date"
+            android:singleLine="true"
+            android:textSize="@dimen/_10ssp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_serial_no"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/til_mfg_date"
+        app:layout_constraintTop_toBottomOf="@id/til_mfg_date"
+        app:layout_constraintBottom_toTopOf="@id/til_kit_id"
+       >
+
+        <EditText
+            android:id="@+id/etSerial"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="text"
+            android:enabled="false"
+            android:hint="@string/hintSerial"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="@dimen/_11ssp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_project_ref_no"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/til_serial_no"
+        app:layout_constraintTop_toTopOf="@id/til_serial_no"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@id/til_serial_no"
+        app:layout_constraintEnd_toEndOf="parent"
+       >
+
+        <EditText
+            android:id="@+id/etProjectRef"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="text"
+            android:enabled="false"
+            android:hint="@string/hintProjectRef"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="@dimen/_11ssp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_kit_id"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/til_qty"
+        app:layout_constraintStart_toStartOf="@id/til_serial_no"
+        app:layout_constraintTop_toBottomOf="@id/til_serial_no"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/et_kit_id"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="text" android:enabled="false"
+            android:hint="@string/hintKitId"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="@dimen/_10ssp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_mrp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/til_kit_id"
+        app:layout_constraintTop_toTopOf="@id/til_kit_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/til_kit_id"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+       >
+
+        <EditText
+            android:id="@+id/et_mrp"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="text"
+            android:enabled="false"
+            android:hint="@string/hintMRP"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="@dimen/_10ssp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_qty"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/til_kit_id"
+        app:layout_constraintTop_toBottomOf="@id/til_kit_id"
+      app:layout_constraintBottom_toTopOf="@id/iv_capture_image"
+        android:layout_marginBottom="@dimen/_20sdp"
+       >
+
+        <EditText
+            android:id="@+id/etQty"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="text"
+            android:enabled="true"
+            android:hint="@string/hintQty"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="@dimen/_10ssp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_hu"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/til_qty"
+        app:layout_constraintTop_toTopOf="@id/til_qty"
+        app:layout_constraintBottom_toBottomOf="@id/til_qty"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+       >
+
+        <EditText
+            android:id="@+id/lblHu"
+            style="@style/editTextStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="text"
+            android:enabled="false"
+            android:hint="@string/hu"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="@dimen/_10ssp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/iv_capture_image"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/border_storke"
+        android:layout_weight=".6"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:contentDescription="@string/image_content_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnReceive"
+        android:src="@drawable/ic_baseline_camera_alt_24"/>
+
+    <Button
+        android:id="@+id/btnReceive"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/button_shape_putaway"
+        android:textSize="16sp"
+        android:elevation="30dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/iv_capture_image"
+        app:layout_constraintTop_toTopOf="@id/iv_capture_image"
+        app:layout_constraintEnd_toStartOf="@id/btnClear"
+        android:paddingStart="@dimen/_16sdp"
+        android:paddingEnd="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_capture_image"
+        android:text="@string/receive"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/border_storke"
+        android:textSize="16sp"
+        android:elevation="30dp"
+        android:textStyle="bold"
+        android:text="@string/clear"
+        android:paddingEnd="@dimen/_16sdp"
+        android:paddingStart="@dimen/_16sdp"
+        app:layout_constraintStart_toEndOf="@+id/btnReceive"
+        app:layout_constraintTop_toTopOf="@id/btnReceive"
+        app:layout_constraintBottom_toBottomOf="@id/btnReceive"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAllCaps="false"
+        android:textColor="@color/tint_color" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

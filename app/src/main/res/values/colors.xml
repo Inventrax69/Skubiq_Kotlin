@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <color name="colorPrimary"> #30739f</color>
+    <color name="colorPrimaryDark">#008cec</color>
+    <color name="colorAccent">#842D8F</color>
+    <color name="textInputLayoutHint">#2a328a</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="red">#bc1e1e</color>
+    <color name="labelBackground">#f6f0ba</color>
+    <color name="scanLabelBackground">#fed5a4</color>
+    <color name="warningColor">#eab63d</color>
+    <color name="activity_main_bottom_bar_background_color">@color/colorPrimary</color>
+    <color name="activity_main_bottom_bar_foreground_color">@color/white</color>
+    <color name="activity_main_top_bar_background_color">@color/colorPrimary</color>
+    <color name="activity_main_top_bar_foreground_color">@color/white</color>
+    <color name="colorControlNormal">#c5c5c5</color>
+    <color name="ashblack">#E9E9E9</color>
+    <color name="button_color">#DC1963</color>
+    <color name="tint_color">#A845A5</color>
+    #DC1963
+    <!-- Recycler View List Selectors -->
+
+    <color name="list_background_pressed">#161868</color>
+    <color name="list_background">#E6E6E6</color>
+    <color name="green">#2a8e23</color>
+    <color name="locationColor">#A845A5</color>
+    <color name="palletColor">#0FADB9</color>
+    <color name="skuColor">#0FADB9</color>
+    <color name="parentColor">#03A9F4</color>
+    <color name="childColor">#3F51B5</color>
+    <color name="gold">#d44fa4</color>
+    <color name="lightgreen">#f63d2e</color>
+    <color name="skubiklocation">#FF9933</color>
+    <color name="skubikSocolor">#9933FF</color>
+    <color name="skubikToContainer">#00CC66</color>
+    <color name="pink">#DE165E</color>
+    <color name="view_color">#E1E1E1</color>
+    <color name="pallet_color"> #4F6CAB</color>
+
+    <color name="grey">#A4A4A4</color>
+    <color name="lite_loc_background">#E4D3EF</color>
+    <color name="lite_sku_background"> #CBE6E8</color>
+    <color name="lite_pallet_background">#B9CCF7</color>
+
+
+
+    <!--colors for modern ui-->
+    <color name="whiteTextColor">#fff</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="loginBkColor">#f0f0f0</color>
+
+
+    <!--colros for card-->
+    <color name="whiteCardColor">#fff</color>
+
+
+    <!--    <color name="defaultOutlineAmbientShadowColor" tools:ignore="MissingDefaultResource">#DE165E</color>-->
+    <!--    <color name="defaultOutlineSpotShadowColor" tools:ignore="DuplicateDefinition,MissingDefaultResource">#DE165E</color>-->
+
+
+    <!-- Application Main Outlook Colors -->
+
+
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+
+
+
+
+
+
+
+
+
+</resources>

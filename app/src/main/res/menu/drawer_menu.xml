@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/home"
+            android:title="@string/home" />
+    </group>
+
+    <item
+        android:id="@+id/menu_inbounds"
+        android:icon="@drawable/inbound"
+        android:title="@string/inbound"
+        android:checkable="false">
+        <menu>
+            <item
+                android:id="@+id/receiving_fragment"
+                android:title="@string/receiving"
+                android:icon="@drawable/receiving" />
+            <item
+                android:id="@+id/putaway_fragment"
+                android:title="@string/putaway"
+                android:icon="@drawable/putaway" />
+        </menu>
+    </item>
+
+</menu>

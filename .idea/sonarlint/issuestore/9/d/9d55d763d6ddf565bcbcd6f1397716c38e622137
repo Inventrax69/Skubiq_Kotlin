@@ -1,0 +1,69 @@
+
+J
+java:S3740 "/Provide the parametrized type for this generic.(èš´şÿÿÿÿ
+E
+java:S3740$"/Provide the parametrized type for this generic.(ä˜å
+E
+java:S37404"/Provide the parametrized type for this generic.(¦«Ÿ×
+K
+java:S3740†"/Provide the parametrized type for this generic.(È Óÿÿÿÿÿ
+K
+java:S3740"/Provide the parametrized type for this generic.(Î’£üÿÿÿÿ
+F
+java:S3740£"/Provide the parametrized type for this generic.(¨ÆëÈ
+?
+java:S1604¨"(Make this anonymous inner class a lambda(êİÛª
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(à—Ïõ
+n	java:S116""YRename this field "_listViewItems" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(é²ĞÍ
+o	java:S116$"ZRename this field "_searchableItem" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä˜å
+t	java:S116&"_Rename this field "_onSearchTextChanged" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(àÔ»ú
+k	java:S116("VRename this field "_searchView" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôŒ£İ
+h	java:S116*"TRename this field "_strTitle" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºæ„9
+v	java:S116,"aRename this field "_strPositiveButtonText" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«¬¼
+u	java:S116."[Rename this field "_onClickListener" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–€šııÿÿÿÿ
+œ
+java:S11860"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÑÅ²ßüÿÿÿÿ
+Q
+java:S1874"6Remove this use of "DialogFragment"; it is deprecated.(´°êÖıÿÿÿÿ
+O
+java:S1874;"4Remove this use of "setArguments"; it is deprecated.(‰õˆ²üÿÿÿÿ
+`
+java:S1874A"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(ßìê¯
+>
+java:S1185A"(Remove this method to simply inherit it.(ßìê¯
+K
+java:S1874B"0Remove this use of "onCreate"; it is deprecated.(î±¨Ôøÿÿÿÿ
+e
+java:S1874G"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(ËÄ•åûÿÿÿÿ
+G
+java:S1874I"1Remove this use of "getDialog"; it is deprecated.(ë­Ü÷
+J
+java:S1874K"4Remove this use of "onCreateView"; it is deprecated.(Ï«ş•
+e
+java:S1874O"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(à“æ…øÿÿÿÿ
+N
+java:S1874R"3Remove this use of "getActivity"; it is deprecated.(¤ÀÊæøÿÿÿÿ
+M
+java:S1874Y"7Remove this use of "getSerializable"; it is deprecated.(£í¢Ó
+N
+java:S1874`"3Remove this use of "getActivity"; it is deprecated.(ÏĞÜşÿÿÿÿ
+`
+java:S1874s"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(úˆ¾Ú
+V
+java:S1874u";Remove this use of "onSaveInstanceState"; it is deprecated.(šÛ¸°øÿÿÿÿ
+O
+java:S1874"3Remove this use of "getActivity"; it is deprecated.(ë˜™øÿÿÿÿ
+O
+java:S1874“"3Remove this use of "getActivity"; it is deprecated.(¾±–üÿÿÿÿ
+O
+java:S1874™"3Remove this use of "getActivity"; it is deprecated.(›¿Úáûÿÿÿÿ
+P
+java:S1874"4Remove this use of "getArguments"; it is deprecated.(Î’£üÿÿÿÿ
+S
+java:S1874"7Remove this use of "getSerializable"; it is deprecated.(Î’£üÿÿÿÿ
+J
+java:S1874£"3Remove this use of "getActivity"; it is deprecated.(¨ÆëÈ
+H
+java:S1874¬"1Remove this use of "getDialog"; it is deprecated.(•ºĞ
+R	java:S125¾"<This block of commented-out lines of code should be removed.(€Ş½®
+W	java:S125À"<This block of commented-out lines of code should be removed.(­’ñıøÿÿÿÿ
