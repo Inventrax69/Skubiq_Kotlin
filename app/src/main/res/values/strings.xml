@@ -517,6 +517,7 @@
     <string name="EMC_0170">Invalid User Details</string>
     <string name="EMC_0171">No more suggestions</string>
     <string name="EMC_0172">Do you want to scan serial number </string>
+    <string name="EMC_0173">Something went wrong</string>
     //hardcoded strings
 
     <string name="dialog_confirm">Confirm</string>
@@ -666,6 +667,7 @@
 
     <string name="pick_serial_number">Pick Serial No.</string>
     <string name="title_activity_pod">POD Signature</string>
+    <string name="err_select_store_ref_no_and_vehicle_no">Please select the store ref no and vehicle no</string>
 
     <string name="imtPallet">Imt Pallet</string>
     <string name="lbldock">Dock:</string>
@@ -754,6 +756,11 @@
         <item>@string/housekeeping</item>
     </string-array>
 
+    <string-array name="scan_type">
+        <item>@string/auto</item>
+        <item>@string/manual</item>
+    </string-array>
+
     <string name="bin_Transfer">Bin Transfer</string>
     <string name="intermediate_pallet">Intermediate Pallet</string>
     <string name="msp">MSP</string>
@@ -765,5 +772,6 @@
     <string name="image_content_description">ImageContentDescription</string>
 
     <string name="tv_exception">Something went wrong</string>
+    <string name="err_please_select_scan_type">Please Select Scan Type</string>
 
 </resources>

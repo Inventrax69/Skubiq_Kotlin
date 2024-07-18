@@ -46,14 +46,14 @@
         android:text="@string/scan_type">
     </TextView>
 
-    <Spinner
+    <com.example.skubiq_kotlin.searchableSpinner.SearchableSpinner
         android:id="@+id/spinnerSelectDivision"
         style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="110dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="45dp">
-    </Spinner>
+    </com.example.skubiq_kotlin.searchableSpinner.SearchableSpinner>
 
     <ImageView
         android:id="@+id/ivLogo"

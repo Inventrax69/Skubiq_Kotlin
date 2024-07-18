@@ -13,7 +13,7 @@ class LoginSignupViewModel(private val loginSignupRepo: LoginSignupRepo) : BaseV
 
     val loginUserRSLiveData: MutableLiveData<String> = MutableLiveData()
     val wareHouselistData: MutableLiveData<String> = MutableLiveData()
-    val inboundListData : MutableLiveData<String> = MutableLiveData()
+
     private val gson: Gson = Gson()
 
 
@@ -30,17 +30,8 @@ class LoginSignupViewModel(private val loginSignupRepo: LoginSignupRepo) : BaseV
         }
     }
 
-    fun getInboundAPI(wareHouseRequest: WMSCoreMessageRequest){
-        launch {
-            postValue(loginSignupRepo.getInboundAPI(wareHouseRequest), inboundListData)
-        }
-    }
 
     fun parseJsonToMyModel(jsonString: String): WMSCoreMessage {
         return gson.fromJson(jsonString, WMSCoreMessage::class.java)
     }
-
-
-
-
 }

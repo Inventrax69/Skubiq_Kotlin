@@ -50,8 +50,6 @@ fun createOkHttpClient(context: Context): OkHttpClient {
         val access_token: String = sharedPreferencesUtil.getString("access_token", "")
         request.addHeader("Authorization", "Bearer $access_token")
         chain.proceed(request.build())
-
-
     }
 
 

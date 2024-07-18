@@ -27,14 +27,14 @@
                     android:layout_weight="0.6"
                     android:textColor="@color/black"
                     android:text="@string/storeRefNo"
-                    android:textSize="@dimen/_8ssp"
+                    android:textSize="@dimen/_10ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/lblInboundQty"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="1.4"
@@ -65,6 +65,8 @@
                     android:layout_weight=".7"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
+                    android:text="@string/lbl_batch"
+                    android:layout_marginStart="@dimen/_20sdp"
                     app:layout_constraintStart_toEndOf="@id/tv_pallet"
                     app:layout_constraintTop_toTopOf="@id/tv_pallet"
                     app:layout_constraintBottom_toBottomOf="@id/tv_pallet"
@@ -198,8 +200,9 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             app:cardBackgroundColor="@color/locationColor"
+                            app:layout_constraintBottom_toTopOf="@+id/etDock"
                             app:cardCornerRadius="20dp"
-                            android:layout_marginTop="@dimen/_10sdp"
+
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_title"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -207,22 +210,26 @@
 
                             <ImageView
                                 android:id="@+id/ivScanDock"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:contentDescription="@string/image_content_description"
-                                android:background="@drawable/qr3" />
+                                android:background="@drawable/qr3"
+                                android:contentDescription="@string/image_content_description" />
 
                         </androidx.cardview.widget.CardView>
 
-                        <View
-                            android:id="@+id/view_bottom"
+                        <TextView
+                            android:id="@+id/etDock"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_15sdp"
+                            android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/cvScanDock"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="@dimen/_10sdp"
+
+                            android:textColor="@color/black"
+                            android:padding="@dimen/_5sdp"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:background="@color/lite_loc_background"/>
 
@@ -276,7 +283,7 @@
                             android:layout_height="40dp"
                             app:cardBackgroundColor="@color/pallet_color"
                             app:cardCornerRadius="20dp"
-                            android:layout_marginTop="@dimen/_10sdp"
+
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_card_pallet"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -284,22 +291,25 @@
 
                             <ImageView
                                 android:id="@+id/ivScanPallet"
-                                android:layout_width="20dp"
+                                android:layout_width="17dp"
                                 android:layout_height="20dp"
                                 android:layout_gravity="center"
-                                android:contentDescription="@string/image_content_description"
-                                android:background="@drawable/qr3" />
+                                android:background="@drawable/qr3"
+                                android:contentDescription="@string/image_content_description" />
 
                         </androidx.cardview.widget.CardView>
 
-                        <View
-                            android:id="@+id/view_bottom_card_pallet"
+                        <TextView
+                            android:id="@+id/etPallet"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_15sdp"
+                            android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/cvScanPallet"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="@dimen/_10sdp"
+
+                            android:textColor="@color/black"
+                            android:padding="@dimen/_5sdp"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:background="@color/lite_pallet_background"/>
 
@@ -354,7 +364,7 @@
                             android:layout_height="40dp"
                             app:cardBackgroundColor="@color/skuColor"
                             app:cardCornerRadius="20dp"
-                            android:layout_marginTop="@dimen/_10sdp"
+
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_title_card_sku"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -370,14 +380,18 @@
 
                         </androidx.cardview.widget.CardView>
 
-                        <View
-                            android:id="@+id/view_bottom_card_sku"
+                        <TextView
+                            android:id="@+id/lblScannedSku"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_15sdp"
+                            android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/cvScanSKU"
                             app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="@dimen/_10sdp"
+
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:padding="@dimen/_5sdp"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:background="@color/lite_sku_background"/>
 
@@ -439,7 +453,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.example.skubiq_kotlin.searchableSpinner.SearchableSpinner
-        android:id="@+id/spinner_select_sloc"
+        android:id="@+id/spinnerSelectSloc"
         android:layout_width="@dimen/_120sdp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
@@ -620,6 +634,18 @@
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/cbDescripency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/til_kit_id"
+        app:layout_constraintTop_toBottomOf="@id/til_kit_id"
+        app:layout_constraintBottom_toTopOf="@id/til_qty"
+        android:visibility="gone"
+        android:layout_weight="0.8"
+        android:text="@string/desc" />
+
 
 
     <com.google.android.material.textfield.TextInputLayout

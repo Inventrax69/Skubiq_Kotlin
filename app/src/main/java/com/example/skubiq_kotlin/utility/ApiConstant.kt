@@ -17,5 +17,17 @@ class ApiConstant {
 
         const val ApiStoreRefNo = "Inbound/GetStoreRefNos"
 
+        const val ApiValidateLocation = "Scan/ValidateLocation"
+
+        const val ApiValidateEmptyPallet = "Scan/ValidatePallet"
+
+        const val ApiValidateMaterial = "Scan/ValiDateMaterial"
+
+        const val ApiGetReceivedQTY = "Inbound/GetReceivedQty"
+
+        const val ApiUpdateReceiveItemForHHT = "Inbound/UpdateReceiveItemForHHT"
+
+        const val ApiGetStorageLocations = "Inbound/GetStorageLocations"
+
     }
 }

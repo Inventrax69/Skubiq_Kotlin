@@ -1,8 +1,10 @@
 package com.example.skubiq_kotlin.models
 
 
+import android.os.Parcelable
 import com.example.skubiq_kotlin.constants.EndpointConstants
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 
 data class WMSCoreMessage(
@@ -111,17 +113,134 @@ data class HousekeepingDTO(
     @SerializedName("IsCustomLabel") var isCustomLabel: String=""
 )
 
-/*
-data class InboundDTO (
+@Parcelize
+data class InboundDTO(
 
-    @SerializedName("AccountID"        ) var AccountID        : String? = null,
-    @SerializedName("MaterialMasterID" ) var MaterialMasterID : Int?    = null,
-    @SerializedName("SupplierId"       ) var SupplierId       : Int?    = null,
-    @SerializedName("UserId"           ) var UserId           : String? = null,
-    @SerializedName("WarehouseID"      ) var WarehouseID      : String? = null
+    @SerializedName("_InboundNumber") var InboundNumber: String?  = null,
+    @SerializedName("_Location") var Location: String? = null,
+    @SerializedName("MDescription") var MDescription: String? = null,
+    @SerializedName("SupplierInvoiceDetailsID") var SupplierInvoiceDetailsID: String? = null,
+    @SerializedName("UserId") var UserId: String?  = null,
+    @SerializedName("InboundID") var InboundID: String? = null,
+    @SerializedName("StoreRefNo") var StoreRefNo: String? = null,
+    @SerializedName("Storerefno") var Storerefno: String? = null,
+    @SerializedName("PalletNo") var PalletNo: String? = null,
+    @SerializedName("AccountID") var AccountID: String? = null,
+    @SerializedName("StorageLocation") var StorageLocation: String? = null,
+    @SerializedName("Result") var Result: String? = null,
+    @SerializedName("Mcode") var Mcode: String? = null,
+    @SerializedName("MCode") var MCode: String? = null,
+    @SerializedName("ReceivedQty") var ReceivedQty: String? = null,
+    @SerializedName("ItemPendingQty") var ItemPendingQty: String? = null,
+    @SerializedName("BatchNo") var BatchNo: String? = null,
+    @SerializedName("SerialNo") var SerialNo: String? = null,
+    @SerializedName("MfgDate") var MfgDate: String? = null,
+    @SerializedName("ExpDate") var ExpDate: String? = null,
+    @SerializedName("ProjectRefno") var ProjectRefno: String? = null,
+    @SerializedName("Qty") var Qty: String? = null,
+    @SerializedName("Lineno") var Lineno: String? = null,
+    @SerializedName("HasDisc") var HasDisc: String? = null,
+    @SerializedName("CartonNo") var CartonNo: String? = null,
+    @SerializedName("CreatedBy") var CreatedBy: String? = null,
+    @SerializedName("IsDam") var IsDam: String? = null,
+    @SerializedName("SkipType") var SkipType: String? = null,
+    @SerializedName("SkipReason") var SkipReason: String?  = null,
+    @SerializedName("InvoiceQty") var InvoiceQty: String? = null,
+    @SerializedName("IsOutbound") var IsOutbound: String? = null,
+    @SerializedName("MRP") var MRP: String? = null,
+    @SerializedName("Dock") var Dock: String? = null,
+    @SerializedName("Entry")
+    val entry: List<EntryDTO>? =null,
+    @SerializedName("VehicleNo") var VehicleNo: String? = null,
+    @SerializedName("HUNo") var HUNo: String? = null,
+    @SerializedName("HUSize") var HUSize: String? = null,
+    @SerializedName("WarehouseID") var WarehouseID: String? = null,
+    @SerializedName("TenantID") var TenantID: String? = null,
+    @SerializedName("UserRole") var userRole: String? = null,
+    @SerializedName("SLoc") var SLoc: String? = null,
+    @SerializedName("ProjectNo") var ProjectNo: String? = null,
+    @SerializedName("SupplierInvoiceID") var SupplierInvoiceID: String? = null,
+    @SerializedName("POSOHeaderId") var POSOHeaderId: String? = null,
+    @SerializedName("TotalPalletNo") var TotalPalletNo: Int? = null,
+    @SerializedName("palletcount") var palletcount: Int? = null,
+    @SerializedName("volume") var volume: Int? = null,
+    @SerializedName("weight") var weight: Int? = null,
+    @SerializedName("IsCustomLabel") var IsCustomLabel: String? = null,
+    @SerializedName("ImageURL") var ImageURL: String? = null,
+    @SerializedName("MaterialMasterID") var MaterialMasterID: Int? = 0,
+    @SerializedName("LocationID") var LocationID: Int? = null,
+    @SerializedName("CartonId") var CartonId: Int? = null,
+    @SerializedName("StorageLocationID") var StorageLocationID: Int? = null,
+    @SerializedName("MMID") var MMID: Int? = null,
+    @SerializedName("Remarks") var Remarks: String? = null,
+    @SerializedName("IsDamaged") var IsDamaged: Int? = null,
+    @SerializedName("IsShipmentClose") var IsShipmentClose: Int? = null,
+    @SerializedName("GoodsMovementDetailsId") var GoodsMovementDetailsId: Int? = null,
+    @SerializedName("Uom") var Uom: String? = null,
+    @SerializedName("UomQty") var UomQty: Int? = null,
+    @SerializedName("Sku") var Sku: String? = null,
+    @SerializedName("FilePath") var FilePath: String? = null,
+    @SerializedName("PoNumber") var PoNumber: String? = null,
+    @SerializedName("InvoiceNo") var InvoiceNo: String? = null,
+    @SerializedName("MaterialMasterUOMId") var MaterialMasterUOMId: Int? = null,
+    @SerializedName("SupplierId") var SupplierId: Int? = null,
+    @SerializedName("SupplierName") var SupplierName: String? = null,
+    @SerializedName("SupplierCode") var SupplierCode: String? = null,
+    @SerializedName("POHeaderID") var POHeaderID: Int? = null,
+    @SerializedName("NoOfBoxes") var NoOfBoxes: Int? = null,
+    @SerializedName("ZPLScript") var ZPLScript: String? = null,
+    @SerializedName("WhId") var WhId: Int? = null,
+    @SerializedName("Ponumber") var Ponumber: String? = null,
+    @SerializedName("ScanInput") var ScanInput: String? = null,
+    @SerializedName("TotalQty") var TotalQty: String? = null,
+    @SerializedName("ScanResult") var ScanResult: Boolean? = null,
+    @SerializedName("BoxResult") var BoxResult: String? = null
+) : Parcelable
+
+@Parcelize
+data class EntryDTO(
+    @SerializedName("DockNumber"    ) var DockNumber    : String? = null,
+    @SerializedName("VehicleNumber" ) var VehicleNumber : String? = null,
+    @SerializedName("DockID"        ) var DockID        : String? = null
+
+) : Parcelable
+
+data class ScanDTO(
+    @SerializedName("SupplierInvoiceDetailsID") var SupplierInvoiceDetailsID : String?  = null,
+    @SerializedName("ScanInput") var ScanInput: String?  = null,
+    @SerializedName("ScanResult") var ScanResult: Boolean? = null,
+    @SerializedName("Message") var Message: String?  = null,
+    @SerializedName("WarehouseID") var WarehouseID : String?  = null,
+    @SerializedName("TenantID"                 ) var TenantID                 : String?  = null,
+    @SerializedName("SkuCode"                  ) var SkuCode                  : String?  = null,
+    @SerializedName("Batch"                    ) var Batch                    : String?  = null,
+    @SerializedName("SerialNumber"             ) var SerialNumber             : String?  = null,
+    @SerializedName("ExpDate"                  ) var ExpDate                  : String?  = null,
+    @SerializedName("MfgDate"                  ) var MfgDate                  : String?  = null,
+    @SerializedName("PrjRef"                   ) var PrjRef                   : String?  = null,
+    @SerializedName("KitID"                    ) var KitID                    : String?  = null,
+    @SerializedName("LineNumber"               ) var LineNumber               : String?  = null,
+    @SerializedName("InboundID"                ) var InboundID                : String?  = null,
+    @SerializedName("UserID"                   ) var UserID                   : String?  = null,
+    @SerializedName("Mrp"                      ) var Mrp                      : String?  = null,
+    @SerializedName("ObdNumber"                ) var ObdNumber                : String?  = null,
+    @SerializedName("VlpdNumber"               ) var VlpdNumber               : String?  = null,
+    @SerializedName("AccountID") var AccountID: Int? = null,
+    @SerializedName("IsCycleCount"             ) var IsCycleCount             : Boolean? = null,
+    @SerializedName("HUSize"                   ) var HUSize                   : String?  = null,
+    @SerializedName("HUNo"                     ) var HUNo                     : String?  = null,
+    @SerializedName("UOM"                      ) var UOM                      : String?  = null,
+    @SerializedName("Length"                   ) var Length                   : Int?     = null,
+    @SerializedName("Width"                    ) var Width                    : Int?     = null,
+    @SerializedName("Height"                   ) var Height                   : Int?     = null,
+    @SerializedName("Weight"                   ) var Weight                   : Int?     = null,
+    @SerializedName("volume"                   ) var volume                   : Int?     = null,
+    @SerializedName("CartonID"                 ) var CartonID                 : Int?     = null,
+    @SerializedName("Location"                 ) var Location                 : String?  = null,
+    @SerializedName("Description"              ) var Description              : String?  = null,
+    @SerializedName("IsSerialNo"               ) var IsSerialNo               : Boolean? = null
 
 )
-*/
 
 
 

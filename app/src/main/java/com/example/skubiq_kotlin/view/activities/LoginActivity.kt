@@ -11,20 +11,34 @@ import android.text.method.PasswordTransformationMethod
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.skubiq_kotlin.LoginSignupViewModel
+import com.example.skubiq_kotlin.MyApplication.Companion.context
 import com.example.skubiq_kotlin.R
 import com.example.skubiq_kotlin.databinding.ActivityLoginBinding
-import com.example.skubiq_kotlin.models.*
-import com.example.skubiq_kotlin.utility.*
+import com.example.skubiq_kotlin.models.AuthToken
+import com.example.skubiq_kotlin.models.LoginUserDTO
+import com.example.skubiq_kotlin.models.ProfileDTO
+import com.example.skubiq_kotlin.models.WMSCoreMessage
+import com.example.skubiq_kotlin.models.WMSCoreMessageRequest
+import com.example.skubiq_kotlin.models.WMSExceptionMessage
+import com.example.skubiq_kotlin.utility.Common
+import com.example.skubiq_kotlin.utility.SharedPreferencesUtil
+import com.example.skubiq_kotlin.utility.getDeviceSerialNumber
+import com.example.skubiq_kotlin.utility.getIPAddress
+import com.example.skubiq_kotlin.utility.getMacAddress
+import com.example.skubiq_kotlin.utility.getTimeStamp
 import com.example.skubiq_kotlin.utils.Constants
 import com.example.skubiq_kotlin.utils.NetworkUtils
 import com.google.gson.Gson
 import com.google.gson.JsonElement
+import com.inventrax.skubiq.util.ProgressDialogUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -35,7 +49,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private val gson: Gson = Gson()
     private var sharedPreferencesUtil: SharedPreferencesUtil? = null
     private val MULTIPLE_PERMISSIONS : Int = 10
-
+    private var listDivision: java.util.ArrayList<String>? = null
+    private var scanType: String? = null
+    private lateinit var common: Common
+    private var  progressDialogUtils: ProgressDialogUtils? = null
     private var permissions = arrayOf<String>(
         Manifest.permission.CAMERA,
         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -59,6 +76,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         sharedPreferencesUtil = SharedPreferencesUtil(this@LoginActivity, "Loginactivity")
+        common = Common()
 
         binding.etPass.setOnTouchListener(OnTouchListener { v, event ->
             val DRAWABLE_LEFT = 0
@@ -86,14 +104,39 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         })
 
 
-
         loafFoamControllers()
         attachObserver()
+
+        listDivision = java.util.ArrayList()
+        listDivision!!.add(resources.getString(R.string.manual))
+        listDivision!!.add(resources.getString(R.string.auto))
+
+
+        val listDivisionAdapter: ArrayAdapter<*> = ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_dropdown_item, listDivision!! as List<Any?>)
+        binding.spinnerSelectDivision.setAdapter(listDivisionAdapter)
+
+        binding.spinnerSelectDivision.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                scanType = binding.spinnerSelectDivision.getSelectedItem().toString()
+                sharedPreferencesUtil!!.saveString("scanType", scanType!!)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(this@LoginActivity, resources.getString(R.string.err_please_select_scan_type), Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     private fun loafFoamControllers(){
         requestforpermissions(permissions)
         binding.btnLogin.setOnClickListener(this)
+        progressDialogUtils = ProgressDialogUtils(this)
     }
 
     override fun onClick(v: View?) {
@@ -145,7 +188,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     fun login(){
 
-        Constants.showCustomProgressDialog(this)
+        //Constants.showCustomProgressDialog(this)
+        ProgressDialogUtils.showProgressDialog(resources.getString(R.string.please_wait))
 
         val wmsCoreMessageRequest = WMSCoreMessageRequest()
         val authToken = AuthToken()
@@ -186,15 +230,34 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 if (it.isNotEmpty()){
 
                     try {
-                        Constants.hideProgressDialog()
+                        //Constants.hideProgressDialog()
+                        ProgressDialogUtils.closeProgressDialog()
                         response = loginSignupViewModel.parseJsonToMyModel(this)
 
                         if (response.Type!!.equals("Exception")){
                             Constants.showAlertDialog(this@LoginActivity, resources.getString(R.string.EMC_0001))
                             //Toast.makeText(this@LoginActivity, resources.getString(R.string.tv_exception), Toast.LENGTH_SHORT).show()
 
+                            var entityObject = response.EntityObject as List<*>
+
+                            //inboundDTO = response.EntityObject as InboundDTO
+
+                            for (entity in entityObject) {
+                                if (entity is Map<*, *>) {
+                                    val map = entity as Map<*, *>
+                                    val jsonElement: JsonElement = gson.toJsonTree(map)
+                                    val pojo: WMSExceptionMessage = gson.fromJson(jsonElement, WMSExceptionMessage::class.java)
+                                    this.let { it1 -> context?.let { it2 ->
+                                        common.showAlertType(pojo, this@LoginActivity,
+                                            it2
+                                        )
+                                    } }
+                                }
+
+                            }
+
                         }else{
-                            //Log.i("response", response.Type.toString())
+                            //Log.i("response", response.Type.toString())[
 
                             try {
                                 var entityobject = response.EntityObject as List<*>
@@ -273,24 +336,25 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                         }
                                     }
 
-                                    for (profile in profileList) {
+                                    for (profile in profileList) {\
+                                    ]
                                         print(profile)
                                     }*/
                             }
-
-
                             }catch (ex : Exception){
                                 Constants.showAlertDialog(this@LoginActivity, resources.getString(R.string.EMC_0170))
                             }
                         }
                     }catch (ex : Exception){
-                        Constants.hideProgressDialog()
-                        Constants.showAlertDialog(this@LoginActivity, resources.getString(R.string.EMC_0170))
-                        //Toast.makeText(this@LoginActivity, resources.getString(R.string.EMC_0001), Toast.LENGTH_SHORT).show()
+                        //Constants.hideProgressDialog()
+                        ProgressDialogUtils.closeProgressDialog()
+                        //Constants.showAlertDialog(this@LoginActivity, resources.getString(R.string.EMC_0170))
+                        Toast.makeText(this@LoginActivity, resources.getString(R.string.EMC_0001), Toast.LENGTH_SHORT).show()
                     }
 
                 }else{
-                    Constants.hideProgressDialog()
+                    //Constants.hideProgressDialog()
+                    ProgressDialogUtils.closeProgressDialog()
                     Constants.showAlertDialog(this@LoginActivity, resources.getString(R.string.EMC_0001))
                 }
 

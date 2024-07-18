@@ -26,17 +26,10 @@
         android:id="@+id/goodsInFragment"
         android:name="com.example.skubiq_kotlin.view.fragments.GoodsInFragment"
         android:label="fragment_goods_in"
-        tools:layout="@layout/fragment_goods_in" />
-    <fragment
-        android:id="@+id/drawerFragment"
-        android:name="com.example.skubiq_kotlin.view.fragments.DrawerFragment"
-        android:label="DrawerFragment" >
-        <action
-            android:id="@+id/action_drawerFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_drawerFragment_to_unloadingFragment"
-            app:destination="@id/unloadingFragment" />
+        tools:layout="@layout/fragment_goods_in">
+        <argument android:name="inboundDetails"
+            app:argType="com.example.skubiq_kotlin.models.InboundDTO"/>
+
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"

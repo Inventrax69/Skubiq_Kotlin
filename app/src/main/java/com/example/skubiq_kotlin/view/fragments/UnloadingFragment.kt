@@ -4,27 +4,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.example.skubiq_kotlin.LoginSignupViewModel
 import com.example.skubiq_kotlin.R
 import com.example.skubiq_kotlin.constants.EndpointConstants
 import com.example.skubiq_kotlin.databinding.FragmentUnloadingBinding
+import com.example.skubiq_kotlin.models.EntryDTO
 import com.example.skubiq_kotlin.models.HousekeepingDTO
+import com.example.skubiq_kotlin.models.InboundDTO
 import com.example.skubiq_kotlin.models.WMSCoreMessage
 import com.example.skubiq_kotlin.models.WMSCoreMessageRequest
-import com.example.skubiq_kotlin.models.entities.EntryDTO
-import com.example.skubiq_kotlin.models.entities.InboundDTO
+import com.example.skubiq_kotlin.models.WMSExceptionMessage
 import com.example.skubiq_kotlin.utility.Common
 import com.example.skubiq_kotlin.utility.SharedPreferencesUtil
+import com.example.skubiq_kotlin.utils.Constants
+import com.example.skubiq_kotlin.utils.NetworkUtils
 import com.example.skubiq_kotlin.view.activities.MainActivity
+import com.example.skubiq_kotlin.viewmodels.InboundViewModel
 import com.google.gson.Gson
-import com.google.gson.internal.LinkedTreeMap
+import com.google.gson.JsonElement
+import com.inventrax.skubiq.util.ProgressDialogUtils
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import kotlin.jvm.internal.Intrinsics.Kotlin
 
 class UnloadingFragment : Fragment() {
 
@@ -42,7 +48,7 @@ class UnloadingFragment : Fragment() {
     private var response = WMSCoreMessage();
     private var gson: Gson = Gson()
     private var housekeepingList = mutableListOf<HousekeepingDTO>()
-    private var inboundList = mutableListOf<InboundDTO>()
+
     private var warehouseList = mutableListOf<String>()
     private var storeRefLst = mutableListOf<String>()
     private lateinit var btnGo : Button
@@ -53,50 +59,126 @@ class UnloadingFragment : Fragment() {
     var inboundId:kotlin.String? = null
     var invoiceQty:kotlin.String? = null
     var receivedQty:kotlin.String? = ""
+    var pendingQTY:kotlin.String? = ""
     var warehouseId:kotlin.String? = null
     var tenantId:kotlin.String? = null
-    var totalPalletCount:kotlin.String? = null
+    var totalPalletCount:kotlin.Int? = null
     var isCustomLabled:kotlin.String? = null
+    var weight:kotlin.Int? = null
 
+    var lstEntry = mutableListOf<List<EntryDTO>>()
     var vehicles: List<String>? = null
-    var lstEntry: List<List<EntryDTO>>? = null
-    var lstInbound: List<InboundDTO>? = null
+    var lstInbound= mutableListOf<InboundDTO>()
 
     var vehilceNo: String = ""
     var dock:kotlin.String? = ""
+    var volume:kotlin.Int? = null
+   // private lateinit var inboundDTO: InboundDTO
 
-    private val loginSignupViewModel: LoginSignupViewModel by sharedViewModel()
+    private val inboundViewModel : InboundViewModel by sharedViewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentUnloadingBinding.inflate(inflater, container, false);
       //  loadFormControllers()
 
-        sharedPreferencesUtil = context?.let { SharedPreferencesUtil(it, "UnloadingFragment") }
+        sharedPreferencesUtil = context?.let { SharedPreferencesUtil(it, "Loginactivity") }
         userID = sharedPreferencesUtil?.getString("RefUserId", "")
         scanType = sharedPreferencesUtil?.getString("scanType", "")
         accountId = sharedPreferencesUtil?.getString("AccountId", "")
         selectedWH = sharedPreferencesUtil?.getString("WarehouseID", "")
+        warehouseId = sharedPreferencesUtil?.getString("WarehouseID", "")
 
-        getInboundData()
-        attachInboundObserver()
+        common  = Common()
 
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title =
+            getString(R.string.title_activity_goodsIn)
+
+
+        if (NetworkUtils.isInternetAvailable(requireContext())){
+            loadInboundDetails()
+        }else{
+            Constants.showAlertDialog(requireActivity(), resources.getString(R.string.please_enable_internet))
+        }
+
+        attachStoreRefObserver()
 
         btnGo = binding.root.findViewById(R.id.btnGo)
+
+        binding.spinnerSelectStRef.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+
+                // getting values as per the selected store ref number
+                getInboundId()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        })
+
+        binding.spinnerSelectVehicle.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+                vehilceNo = ""
+
+                vehilceNo = binding.spinnerSelectVehicle.getSelectedItem().toString()
+
+                for (entryDTO in lstEntry) {
+                    for (k in entryDTO.indices) {
+                        if (entryDTO[k].VehicleNumber.equals(vehilceNo)) {
+                            dock = entryDTO[k].DockNumber
+                        }
+                    }
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+            }
+        })
+
         btnGo.setOnClickListener {
+
+            val inboundDTO = InboundDTO()
+            inboundDTO.StoreRefNo=Storerefno
+            inboundDTO.InboundID = inboundId
+            inboundDTO.InvoiceQty = invoiceQty
+            inboundDTO.ReceivedQty = receivedQty
+            inboundDTO.ItemPendingQty = pendingQTY
+            inboundDTO.VehicleNo = vehilceNo
+            inboundDTO.TenantID = tenantId
+            inboundDTO.Dock=dock
+            inboundDTO.TotalPalletNo = totalPalletCount
+            inboundDTO.weight = weight
+            inboundDTO.Dock = dock
+            inboundDTO.ReceivedQty = receivedQty
+            inboundDTO.InvoiceQty = invoiceQty
+            inboundDTO.volume = volume
+
+
+
             //FragmentsUtils.replaceFragmentWithBackStack(requireActivity(),R.id.container,GoodsInFragment())
-            findNavController().
-                    navigate(UnloadingFragmentDirections.actionUnloadingFragmentToGoodsInFragment())
+            if (vehilceNo.isNotEmpty() && Storerefno!!.isNotEmpty()){
+                GetInboundDeatils(inboundDTO)
+            }else{
+                Constants.showAlertDialog(requireActivity(), resources.getString(R.string.err_select_store_ref_no_and_vehicle_no))
+            }
 
         }
 
-        //setUpSpinnerStoreRefNumber()
-        setUpSpinnerSelectVehicle()
+
 
         return  binding.root
     }
@@ -105,165 +187,103 @@ class UnloadingFragment : Fragment() {
 
     }
 
-    /*fun loadFormControls() {
+    private fun loadInboundDetails(){
 
-        if (NetworkUtils.isInternetAvailable(requireContext())) {
-            //binding.tvSelectStRef = rootView.findViewById<View>(R.id.tvSelectStRef) as TextView
-            //tvSelectVehcle = rootView.findViewById<View>(R.id.tvSelectVehcle) as TextView
-
-            //spinnerSelectStRef = rootView.findViewById<View>(R.id.spinnerSelectStRef) as SearchableSpinner
-            binding.spinnerSelectStRef.setOnItemSelectedListener(object :
-                AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    Storerefno = binding.spinnerSelectStRef.getSelectedItem().toString()
-
-                    // getting values as per the selected store ref number
-                    getInboundId()
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-            })
-
-            //spinnerSelectVehicle = rootView.findViewById<View>(R.id.spinnerSelectVehicle) as SearchableSpinner
-
-            binding.spinnerSelectVehicle.setOnItemSelectedListener(object :
-                AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    adapterView: AdapterView<*>?,
-                    view: View,
-                    i: Int,
-                    l: Long
-                ) {
-                    vehilceNo = ""
-
-                    vehilceNo = binding.spinnerSelectStRef.getSelectedItem().toString()
-
-                    for (entryDTO in lstEntry!!) {
-                        for (k in entryDTO.indices) {
-                            if (entryDTO[k].vehicleNumber.equals(vehilceNo)) {
-                                dock = entryDTO[k].dockNumber
-                            }
-                        }
-                    }
-                }
-
-                override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                }
-            })
-
-            //btnGo = rootView.findViewById<View>(R.id.btnGo)
-            //binding.btnGo.setOnClickListener(this@MainActivity)
-
-            gson = GsonBuilder().create()
-            core = WMSCoreMessage()
-            sloc = java.util.ArrayList<List<StorageLocationDTO>>()
-            lstStorageloc = java.util.ArrayList<String>()
-            entryDTOList = java.util.ArrayList<EntryDTO>()
-
-            val sp = activity!!.getSharedPreferences("LoginActivity", Context.MODE_PRIVATE)
-            userId = sp.getString("RefUserId", "")
-            scanType = sp.getString("scanType", "")
-            accountId = sp.getString("AccountId", "")
-            selectedWH = sp.getString("WarehouseID", "")
-
-            common = Common()
-            exceptionLoggerUtils = ExceptionLoggerUtils()
-            errorMessages = ErrorMessages()
-            lstInbound = java.util.ArrayList()
-
-            ProgressDialogUtils.closeProgressDialog()
-            common.setIsPopupActive(false)
-
-            LoadInbounddetails()
-        } else {
-            DialogUtils.showAlertDialog(activity, activity!!.resources.getString(R.string.EMC_0025))
-            // soundUtils.alertSuccess(LoginActivity.this,getBaseContext());  ljihggyg
-            return
-        }
-
-//        final Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.right_animation);
-//        txtSelectStRef.setAnimation(animation);
-//        tvSelectVehcle.setAnimation(animation);
-    }*/
-
-    fun getInboundData(){
+        //Constants.showCustomProgressDialog(requireContext())
+        ProgressDialogUtils.showProgressDialog(resources.getString(R.string.please_wait))
 
         var wmsCoreMessageRequest: WMSCoreMessageRequest = WMSCoreMessageRequest()
 
         wmsCoreMessageRequest= context?.let { common.SetAuthentication(EndpointConstants.InboundDTO, it) }!!
 
-        val inboundDTO = com.example.skubiq_kotlin.models.entities.InboundDTO()
+        val inboundDTO = InboundDTO()
         with(inboundDTO){
-            userID = userID.toString()
-            accountId = accountId.toString()
+            UserId = userID.toString()
+            AccountID = accountId.toString()
+            WarehouseID = warehouseId.toString()
 
         }
         with(wmsCoreMessageRequest){
             EntityObject = inboundDTO
         }
 
-        loginSignupViewModel.getInboundAPI(wmsCoreMessageRequest)
+        inboundViewModel.getStoreRefNos(wmsCoreMessageRequest)
+
     }
 
-    fun attachInboundObserver(){
-        loginSignupViewModel.inboundListData.observe(viewLifecycleOwner, Observer {
+    fun attachStoreRefObserver(){
+
+        inboundViewModel.inboundListData.observe(viewLifecycleOwner, Observer {
             it.apply {
 
-                response = loginSignupViewModel.parseJsonToMyModel(this)
+                if (it.isNotEmpty()){
+                    try {
+                        response = inboundViewModel.parseJsonToMyModel(this)
 
-                if (response.Type!!.equals("Exception")) {
-// you have handle
-                } else {
-                    var _lstUnloading: List<LinkedTreeMap<*, *>> = java.util.ArrayList()
-                   _lstUnloading = response.EntityObject as List<LinkedTreeMap<*, *>>
+                        if (response.Type!!.equals("Exception")) {
+                            var entityObject = response.EntityObject as List<*>
 
-                    val lstDto: MutableList<InboundDTO> = java.util.ArrayList()
-                    val _lstINBNames: MutableList<String?> = java.util.ArrayList()
-                    val _lstInboundId: List<String> = java.util.ArrayList()
+                            //inboundDTO = response.EntityObject as InboundDTO
 
-                    for (i in _lstUnloading.indices) {
-                        val dto = InboundDTO(_lstUnloading[i].entries.toString())
-                        lstDto.add(dto)
-                        //lstInbound.add(dto)
-                    }
+                            for (entity in entityObject) {
+                                if (entity is Map<*, *>) {
+                                    val map = entity as Map<*, *>
+                                    val jsonElement: JsonElement = gson.toJsonTree(map)
+                                    val pojo: WMSExceptionMessage = gson.fromJson(jsonElement, WMSExceptionMessage::class.java)
+                                    activity?.let { it1 -> context?.let { it2 ->
+                                        common.showAlertType(pojo, it1,
+                                            it2
+                                        )
+                                    } }
+                                }
 
-                    for (i in lstDto.indices) {
-                        _lstINBNames.add(lstDto[i].storeRefNo)
-                    }
+                            }
+                            // you have handle
+                            //Constants.hideProgressDialog()
+                            ProgressDialogUtils.closeProgressDialog()
+                        } else {
 
-                   /* var entityobject = response.EntityObject as List<*>
-                    inboundList = mutableListOf<InboundDTO>()
-                    warehouseList = mutableListOf<String>()
-                    for (entity in entityobject) {
-                        if (entity is Map<*, *>) {
-                            val map = entity as Map<String, Any>
-                            val jsonElement: JsonElement = gson.toJsonTree(map)
-                            val pojo: InboundDTO =
-                                gson.fromJson(jsonElement, InboundDTO::class.java)
-                            inboundList.add(pojo)
+                            //Constants.hideProgressDialog()
+                            ProgressDialogUtils.closeProgressDialog()
+
+                            var entityObject = response.EntityObject as List<*>
+                            lstInbound = mutableListOf<InboundDTO>()
+                            storeRefLst = mutableListOf<String>()
+
+                            //inboundDTO = response.EntityObject as InboundDTO
+
+                            for (entity in entityObject) {
+                                if (entity is Map<*, *>) {
+                                    val map = entity as Map<*, *>
+                                    val jsonElement: JsonElement = gson.toJsonTree(map)
+                                    val pojo: InboundDTO = gson.fromJson(jsonElement, InboundDTO::class.java)
+                                    lstInbound.add(pojo)
+                                }
+
+                            }
+
+                            for(inbound in lstInbound){
+                                storeRefLst.add(inbound.StoreRefNo!!)
+                            }
+
+
+                            val arrayAdapter: ArrayAdapter<*> = ArrayAdapter<Any?>(
+                                requireContext(),
+                                android.R.layout.simple_spinner_dropdown_item,
+                                storeRefLst as List<Any?>
+                            )
+
+
+                            binding.spinnerSelectStRef.setAdapter(arrayAdapter)
                         }
-
-
+                    }catch (ex : Exception){
+                        Constants.hideProgressDialog()
+                        Constants.showAlertDialog(requireActivity(), resources.getString(R.string.EMC_0173))
                     }
-
-*/
-                    val arrayAdapter: ArrayAdapter<*> = ArrayAdapter<Any?>(
-                        requireContext(),
-                        android.R.layout.simple_spinner_dropdown_item,
-                        _lstINBNames as List<Any?>
-                    )
-                    binding.spinnerSelectStRef.setAdapter(arrayAdapter)
-                    //ProgressDialogUtils.closeProgressDialog()
-
-
+                }else{
+                    Constants.hideProgressDialog()
+                    Constants.showAlertDialog(requireActivity(), resources.getString(R.string.EMC_0173))
                 }
-
             }
         })
     }
@@ -293,29 +313,60 @@ class UnloadingFragment : Fragment() {
         binding.spinnerSelectStRef.setAdapter(arrayAdapter)
     }
 
-    private fun setUpSpinnerSelectVehicle(){
+    private fun getInboundId(){
 
-        val vehicleList : ArrayList<String> = arrayListOf()
-        vehicleList.add("ts23444")
-        vehicleList.add("ts23444")
+        Storerefno = binding.spinnerSelectStRef.getSelectedItem().toString()
+        lstEntry = mutableListOf<List<EntryDTO>>()
+        vehicles = mutableListOf<String>()
 
-        val arrayAdapter: ArrayAdapter<*> = ArrayAdapter<Any?>(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            vehicleList as List<Any?>
-        )
-        binding.spinnerSelectVehicle.setAdapter(arrayAdapter)
+        for (oInbound in lstInbound!!) {
 
+            if (oInbound.StoreRefNo!!.equals(Storerefno)) {
+                inboundId = oInbound.InboundID
+                invoiceQty = oInbound.InvoiceQty
+                receivedQty = oInbound.ReceivedQty
+                warehouseId = oInbound.WarehouseID
+                tenantId = oInbound.TenantID
+                isCustomLabled = oInbound.IsCustomLabel
+                totalPalletCount = oInbound.TotalPalletNo
+
+                oInbound.entry?.let { lstEntry.add(it) }    // to get vehicle numbers and dock values
+
+                for (entryList in lstEntry) {
+                    for (entry in entryList) {
+                        entry.VehicleNumber?.let {
+                            (vehicles as MutableList<String>).add(it)
+                        } // list of vehicles assigned to the st. ref no
+                    }
+                }
+            }
+
+                val vehicleAdapter: ArrayAdapter<*> = ArrayAdapter<Any?>(
+                    requireContext(),
+                    android.R.layout.simple_spinner_dropdown_item,
+                    vehicles as List<Any?>
+                )
+
+
+                binding.spinnerSelectVehicle.setAdapter(vehicleAdapter)
+
+            }
+        }
+
+    private fun GetInboundDeatils(inboundDTO: InboundDTO) {
+
+        //val action = UnloadingFragmentDirections.actionUnloadingFragmentToGoodsInFragment()
+
+        findNavController().navigate(UnloadingFragmentDirections.actionUnloadingFragmentToGoodsInFragment(inboundDTO))
 
     }
-
 
     override fun onResume() {
         super.onResume()
 
         (activity as AppCompatActivity?)!!.supportActionBar!!.title =
             getString(R.string.title_activity_goodsIn)
+
+        attachStoreRefObserver()
     }
-
-
 }

@@ -138,7 +138,7 @@ class DrawerFragment : Fragment(), View.OnClickListener {
                 when (childPosition) {
                     0 -> {
                         //Toast.makeText(requireActivity(), "Clicked", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(DrawerFragmentDirections.actionDrawerFragmentToUnloadingFragment())
+                        //findNavController().navigate(DrawerFragmentDirections.actionDrawerFragmentToUnloadingFragment())
                         //navController.navigate(R.id.unloadingFragment)
                     }
 
@@ -215,7 +215,7 @@ class DrawerFragment : Fragment(), View.OnClickListener {
         when(v.id) {
 
             R.id.layout2 -> {
-                findNavController() .navigate(DrawerFragmentDirections.actionDrawerFragmentToHomeFragment())
+                //findNavController() .navigate(DrawerFragmentDirections.actionDrawerFragmentToHomeFragment())
                 //navController.navigate(R.id.homeFragment)
             }
         }

@@ -1,5 +1,6 @@
 package com.example.skubiq_kotlin.view.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -12,6 +13,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -24,8 +27,11 @@ import com.example.skubiq_kotlin.adapters.NavigationDrawerAdapter
 import com.example.skubiq_kotlin.databinding.ActivityMainBinding
 import com.example.skubiq_kotlin.databinding.ToolbarBinding
 import com.example.skubiq_kotlin.view.fragments.DrawerFragment
+import com.example.skubiq_kotlin.view.fragments.GoodsInFragment
+import com.example.skubiq_kotlin.view.fragments.HomeFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.zxing.integration.android.IntentIntegrator
+import com.inventrax.skubiq.util.ProgressDialogUtils
 import com.journeyapps.barcodescanner.CaptureActivity
 
 class MainActivity : AppCompatActivity(){
@@ -44,11 +50,12 @@ class MainActivity : AppCompatActivity(){
     private var containerView: View? = null
     private var adapter: ExpandableListAdapter? = null
     var isSupervisor: Boolean = false
-
+    private var  progressDialogUtils: ProgressDialogUtils? = null
     private lateinit var expandableListView: ExpandableListView
     private lateinit var expandableListAdapter: ExpandableListAdapter
     private lateinit var titleList: List<String>
     private lateinit var dataList: HashMap<String, List<String>>
+    //private lateinit var fragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +84,7 @@ class MainActivity : AppCompatActivity(){
         navController = Navigation.findNavController(this, R.id.container)
         //NavigationUI.setupActionBarWithNavController(this, navController)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+        //fragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
 
         appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment), binding.drawerLayout)
 
@@ -87,6 +95,7 @@ class MainActivity : AppCompatActivity(){
         titleList = ArrayList(dataList.keys)
         expandableListAdapter = NavigationDrawerAdapter(this, titleList, dataList)
         expandableListView.setAdapter(expandableListAdapter)
+        progressDialogUtils = ProgressDialogUtils(this)
 
         binding.navMenu.txtHome.setOnClickListener {
             navController.navigate(R.id.homeFragment)
@@ -98,7 +107,8 @@ class MainActivity : AppCompatActivity(){
             when (dataList[titleList[groupPosition]]?.get(childPosition)) {
                 "Receiving" -> {
                     navController.navigate(R.id.unloadingFragment)
-                    supportActionBar?.title = "Goods In"
+                    (this as AppCompatActivity?)!!.supportActionBar!!.title =
+                        getString(R.string.title_activity_goodsIn)
                 }
                 "putaway" -> navController.navigate(R.id.homeFragment)
             }
@@ -113,7 +123,6 @@ class MainActivity : AppCompatActivity(){
             //binding.drawerLayout.closeDrawers()
             false
         }
-
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setupWithNavController(navController)
 
@@ -163,7 +172,6 @@ class MainActivity : AppCompatActivity(){
 
     private fun getData(): HashMap<String, List<String>> {
         val listData = HashMap<String, List<String>>()
-
 
 
         //val home = listOf<String>("Home")
@@ -295,14 +303,14 @@ class MainActivity : AppCompatActivity(){
 
                 try {
 
-                     //processScan(result.contents)
+                     processScan(result.contents)
 
 
                 } catch (e: Exception) {
                     e.printStackTrace()
 
                     // Data not in the expected format. So, whole object as toast message.
-                    Toast.makeText(this, result.contents, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
                 }
             }
         } else {
@@ -310,24 +318,47 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    /*private fun processScan(scannedData: String) {
+    private fun processScan(scannedData: String) {
 
-        if (scannedData!=null){
+      /*  val fragmentManager : FragmentManager = supportFragmentManager
+        for ( fragment in fragmentManager.fragments ){
 
-            var  fragmentManager : FragmentManager = supportFragmentManager
-            for ( fragment in fragmentManager.fragments ){
+            if (fragment!= null && fragment.isVisible){
 
-                if (fragment!= null && fragment.isVisible){
-
-                    when(fragment){
-                        is UnloadingFragment ->  fragment.myScannedData(this, scannedData)
-                    }
+                when(fragment){
+                    is GoodsInFragment ->  fragment.myScannedData(this, scannedData)
                 }
-
             }
 
+        }*/
+
+        //val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+
+        // Get the current destination ID
+        val currentDestinationId = navController.currentDestination?.id
+
+        // Use the current destination ID to determine the current fragment
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.container)?.childFragmentManager?.fragments?.firstOrNull()
+
+        // Example usage of currentFragment
+        currentFragment?.let {
+            // Perform actions with the current fragment
+
+            when(currentFragment){
+
+                is GoodsInFragment ->{
+                    currentFragment.myScannedData(this, scannedData)
+                }
+
+                is HomeFragment -> {
+                    currentFragment.scanHome()
+                }
+            }
         }
-    }*/
+
+        //oast.makeText(this, scannedData, Toast.LENGTH_SHORT).show()
+
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()

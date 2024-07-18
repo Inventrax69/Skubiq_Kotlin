@@ -43,6 +43,15 @@ android {
 }
 
 dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //noinspection GradleCompatible
+    //   implementation 'com.android.support:cardview-v7:28.0.0-rc02'
+
+    implementation files('libs/BarcodeAPI_V1_1_14.jar')
+    implementation files('libs/DataCollection.jar')
+    implementation files('libs/CWAC-WakefulIntentService.jar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'

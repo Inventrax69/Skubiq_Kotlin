@@ -25,11 +25,45 @@ class LoginSignupApisRepository constructor(
         }
     }
 
-    override suspend fun getInboundAPI(inboundList: WMSCoreMessageRequest): Either<MyException, String> {
+    override suspend fun getStoreRefNos(inboundListPRQ: WMSCoreMessageRequest): Either<MyException, String> {
         return either {
-            loginSignupApiService.getInboundAPI(inboundList)
+            loginSignupApiService.getStoreRefNos(inboundListPRQ)
         }
     }
 
+    override suspend fun validateLocation(scanListPRQ: WMSCoreMessageRequest): Either<MyException, String> {
+        return either {
+            loginSignupApiService.validateLocation(scanListPRQ)
+        }
+    }
 
+    override suspend fun validateEmptyPallet(scanPalletListPRQ: WMSCoreMessageRequest): Either<MyException, String> {
+        return either {
+            loginSignupApiService.validateEmptyPallet(scanPalletListPRQ)
+        }
+    }
+
+    override suspend fun validateMaterial(scanSKUListPRQ: WMSCoreMessageRequest): Either<MyException, String> {
+        return either {
+            loginSignupApiService.validateMaterial(scanSKUListPRQ)
+        }
+    }
+
+    override suspend fun getReceivedQTY(receiveQTYListPRQ: WMSCoreMessageRequest): Either<MyException, String> {
+        return either {
+            loginSignupApiService.getReceivedQTY(receiveQTYListPRQ)
+        }
+    }
+
+    override suspend fun updateReceiveItemForHHT(updateListPRQ: WMSCoreMessageRequest): Either<MyException, String> {
+        return either {
+            loginSignupApiService.updateReceiveItemForHHT(updateListPRQ)
+        }
+    }
+
+    override suspend fun getStorageLocations(storageListPRQ: WMSCoreMessageRequest): Either<MyException, String> {
+        return either {
+            loginSignupApiService.getStorageLocations(storageListPRQ)
+        }
+    }
 }

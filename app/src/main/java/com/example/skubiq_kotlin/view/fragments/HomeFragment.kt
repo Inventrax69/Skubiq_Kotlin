@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,8 +21,8 @@ import com.example.skubiq_kotlin.databinding.WarehouseDropdownListBinding
 import com.example.skubiq_kotlin.models.HousekeepingDTO
 import com.example.skubiq_kotlin.models.WMSCoreMessage
 import com.example.skubiq_kotlin.models.WMSCoreMessageRequest
+import com.example.skubiq_kotlin.models.WMSExceptionMessage
 import com.example.skubiq_kotlin.utility.Common
-import com.example.skubiq_kotlin.utility.FragmentsUtils
 import com.example.skubiq_kotlin.utility.SharedPreferencesUtil
 import com.google.gson.Gson
 import com.google.gson.JsonElement
@@ -47,6 +48,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private var warehouseList = mutableListOf<String>()
 
     private val loginSignupViewModel: LoginSignupViewModel by sharedViewModel()
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -101,8 +106,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
            binding.llReceive.id -> activity?.let {
                //FragmentsUtils.replaceFragmentWithBackStack(it,R.id.container,UnloadingFragment())
                //findNavController().navigate(HomeFragmentDirections.actionHomeFragment2ToUnloadingFragment2())
-               findNavController().
-                       navigate(HomeFragmentDirections.actionHomeFragmentToUnloadingFragment())
+               findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUnloadingFragment())
            }
             binding.btnwarehouse.id -> getWarehouse()
         }
@@ -137,6 +141,24 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                 if (response.Type!!.equals("Exception")){
 // you have handle
+
+                    var entityObject = response.EntityObject as List<*>
+
+                    //inboundDTO = response.EntityObject as InboundDTO
+
+                    for (entity in entityObject) {
+                        if (entity is Map<*, *>) {
+                            val map = entity as Map<*, *>
+                            val jsonElement: JsonElement = gson.toJsonTree(map)
+                            val pojo: WMSExceptionMessage = gson.fromJson(jsonElement, WMSExceptionMessage::class.java)
+                            activity?.let { it1 -> context?.let { it2 ->
+                                common.showAlertType(pojo, it1,
+                                    it2
+                                )
+                            } }
+                        }
+
+                    }
                 }
                 else{
                     var entityobject = response.EntityObject as List<*>
@@ -159,8 +181,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     }
 
 
-
-
                     if (sharedPreferencesUtil?.getString("WarehouseID","")!!.isEmpty()  || sharedPreferencesUtil?.getString("WarehouseID","").equals("")) {
                         showWarehouseDialog(warehouseList)
 
@@ -175,14 +195,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
 
     private fun showWarehouseDialog(housekeepingList: MutableList<String>) {
-        val dialogBinding = WarehouseDropdownListBinding.inflate(LayoutInflater.from(activity))
 
-        val customDialog = AlertDialog.Builder(activity, 0).create()
+        val dialogBinding = WarehouseDropdownListBinding.inflate(LayoutInflater.from(activity))
+        val customDialog = AlertDialog.Builder(requireContext())
         val liveStockAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_dropdown_item, housekeepingList)
 
-        dialogBinding.tvSelect.adapter = liveStockAdapter
+        dialogBinding.spinnerSelectTenant.adapter = liveStockAdapter
 
-        dialogBinding.tvSelect.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+        dialogBinding.spinnerSelectTenant.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedWH = housekeepingList[position].toString()
                 binding.btnwarehouse.text = selectedWH
@@ -195,26 +215,29 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
         })
 
-
-
         customDialog.apply {
             setView(dialogBinding.root)
             setCancelable(false)
             setTitle(resources.getString(R.string.select_wh))
-            setButton(
-                DialogInterface.BUTTON_NEGATIVE,
-                resources.getString(R.string.ok)
-            ) {
-              dialog, which -> customDialog.dismiss()
-            }
+            setNegativeButton(
+                resources.getString(R.string.ok),
+                DialogInterface.OnClickListener { dialogInterface, i -> customDialog.setCancelable(true) }
+            )
+            /*val negativeButton = dialogBinding.root.findViewById<TextView>(R.id.negative_button)
+            negativeButton.setOnClickListener {
+                // Perform negative action
+                customDialog.dismiss()
+            }*/
+
         }
 
-        customDialog.show()
-        val window = customDialog.window
-        window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        val alertDialog: AlertDialog = customDialog.create()
+
+        alertDialog.show()
+        val window = alertDialog.window
+        window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        //val window: Window? = customDialog.getWindow()
+        //window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     }
 
 
@@ -225,6 +248,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 sharedPreferencesUtil?.saveString("WarehouseID", whId)
             }
         }
+    }
+
+    fun scanHome(){
+        Toast.makeText(requireContext(), "Home Fragment", Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {
