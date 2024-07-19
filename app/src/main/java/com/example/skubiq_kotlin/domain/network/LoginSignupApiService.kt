@@ -37,4 +37,7 @@ interface LoginSignupApiService {
 
     @POST(ApiConstant.ApiGetStorageLocations)
     suspend fun getStorageLocations(@Body wmsCoreMessage: WMSCoreMessageRequest) : String
+
+    @POST(ApiConstant.ApiHouseKeepingDTO)
+    suspend fun getTenants(@Body wmsCoreMessage: WMSCoreMessageRequest) : String
 }

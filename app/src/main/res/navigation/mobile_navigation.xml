@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_unloadingFragment"
             app:destination="@id/unloadingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_palletTransfersFragment"
+            app:destination="@id/palletTransfersFragment" />
     </fragment>
     <fragment
         android:id="@+id/unloadingFragment"
@@ -36,4 +39,9 @@
         android:name="com.example.skubiq_kotlin.view.fragments.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/palletTransfersFragment"
+        android:name="com.example.skubiq_kotlin.view.fragments.PalletTransfersFragment"
+        android:label="fragment_pallet_transfers"
+        tools:layout="@layout/fragment_pallet_transfers" />
 </navigation>

@@ -29,5 +29,7 @@ class ApiConstant {
 
         const val ApiGetStorageLocations = "Inbound/GetStorageLocations"
 
+        const val ApiHouseKeepingDTO = "HouseKeeping/GetTenants"
+
     }
 }

@@ -54,8 +54,8 @@ fun createOkHttpClient(context: Context): OkHttpClient {
 
 
     val client = OkHttpClient.Builder()
-        .connectTimeout(120L, TimeUnit.SECONDS)
-        .readTimeout(120L, TimeUnit.SECONDS)
+        .connectTimeout(180L, TimeUnit.SECONDS)
+        .readTimeout(180L, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor)
         .addNetworkInterceptor(networkInterceptor)
         .cookieJar(MyCookieJar())

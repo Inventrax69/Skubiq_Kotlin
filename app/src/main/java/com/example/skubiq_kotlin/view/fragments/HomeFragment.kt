@@ -108,7 +108,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
                //findNavController().navigate(HomeFragmentDirections.actionHomeFragment2ToUnloadingFragment2())
                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUnloadingFragment())
            }
+
             binding.btnwarehouse.id -> getWarehouse()
+
+            binding.llPutaway.id -> {
+
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPalletTransfersFragment())
+                (activity as AppCompatActivity?)!!.supportActionBar!!.title =
+                    getString(R.string.title_activity_pallet_transfer)
+            }
         }
 
     }
@@ -244,7 +252,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     fun getWarehouseId() {
         for (oHouseKeeping in housekeepingList) {
             if (oHouseKeeping.warehouse.equals(selectedWH)) {
-                whId = oHouseKeeping.warehouseId // Warehouse Id of selected warehouse
+                whId = oHouseKeeping.warehouseId!! // Warehouse Id of selected warehouse
                 sharedPreferencesUtil?.saveString("WarehouseID", whId)
             }
         }

@@ -110,7 +110,12 @@ class MainActivity : AppCompatActivity(){
                     (this as AppCompatActivity?)!!.supportActionBar!!.title =
                         getString(R.string.title_activity_goodsIn)
                 }
-                "putaway" -> navController.navigate(R.id.homeFragment)
+                "putaway" -> {
+                    navController.navigate(R.id.palletTransfersFragment)
+                    (this as AppCompatActivity?)!!.supportActionBar!!.title =
+                        getString(R.string.title_activity_pallet_transfer)
+
+                }
             }
             binding.drawerLayout.closeDrawers()
             true
