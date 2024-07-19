@@ -235,6 +235,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         response = loginSignupViewModel.parseJsonToMyModel(this)
 
                         if (response.Type!!.equals("Exception")){
+
                             Constants.showAlertDialog(this@LoginActivity, resources.getString(R.string.EMC_0001))
                             //Toast.makeText(this@LoginActivity, resources.getString(R.string.tv_exception), Toast.LENGTH_SHORT).show()
 

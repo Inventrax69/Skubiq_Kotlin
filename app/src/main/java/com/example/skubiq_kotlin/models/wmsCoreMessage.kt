@@ -242,6 +242,341 @@ data class ScanDTO(
 
 )
 
+@Parcelize
+data class OutboundDTO(
+    @SerializedName("OutboundID")
+    var outboundID: String? = null,
+
+    @SerializedName("PickRefNo")
+    var pickRefNo: List<String>? = null,
+
+    @SerializedName("MRP")
+    var mrp: String? = null,
+
+    @SerializedName("MOP")
+    var mop: String? = null,
+
+    @SerializedName("SKU")
+    var sku: String? = null,
+
+    @SerializedName("SerialNo")
+    var serialNo: String? = null,
+
+    @SerializedName("MfgDate")
+    var mfgDate: String? = null,
+
+    @SerializedName("Location")
+    var location: String? = null,
+
+    @SerializedName("LoadList")
+    var loadList: List<LoadDTO>? = null,
+
+    @SerializedName("PalletNo")
+    var palletNo: String? = null,
+
+    @SerializedName("UserId")
+    var userId: String? = null,
+
+    @SerializedName("IsMaterialDamaged")
+    var isMaterialDamaged: Boolean? = null,
+
+    @SerializedName("IsMaterialNotFound")
+    var isMaterialNotFound: Boolean? = null,
+
+    @SerializedName("Result")
+    var result: String? = null,
+
+    @SerializedName("RequiredQty")
+    var requiredQty: String? = null,
+
+    @SerializedName("PickedQty")
+    var pickedQty: String? = null,
+
+    @SerializedName("SelectedPickRefNumber")
+    var selectedPickRefNumber: String? = null,
+
+    @SerializedName("SelectedLoadSheetNumber")
+    var selectedLoadSheetNumber: String? = null,
+
+    @SerializedName("AllowNestedInventoryDispatch")
+    var allowNestedInventoryDispatch: Boolean? = null,
+
+    @SerializedName("AllowDispatchOfOLDMRP")
+    var allowDispatchOfOLDMRP: Boolean? = null,
+
+    @SerializedName("AllowCrossDocking")
+    var allowCrossDocking: Boolean? = null,
+
+    @SerializedName("StrictComplianceToPicking")
+    var strictComplianceToPicking: Boolean? = null,
+
+    @SerializedName("AutoReconsileInventoryOnSkip")
+    var autoReconsileInventoryOnSkip: Boolean? = null,
+
+    @SerializedName("DockNumber")
+    var dockNumber: String? = null,
+
+    @SerializedName("SuggestionID")
+    var suggestionID: String? = null,
+
+    @SerializedName("RevertQty")
+    var revertQty: String? = null,
+
+    @SerializedName("CustomerCode")
+    var customerCode: String? = null,
+
+    @SerializedName("MaterialMasterId")
+    var materialMasterId: String? = null,
+
+    @SerializedName("OBDNo")
+    var obdNo: String? = null,
+
+    @SerializedName("BatchNo")
+    var batchNo: String? = null,
+
+    @SerializedName("ExpDate")
+    var expDate: String? = null,
+
+    @SerializedName("AssignedQuantity")
+    var assignedQuantity: String? = null,
+
+    @SerializedName("PendingQty")
+    var pendingQty: String? = null,
+
+    @SerializedName("AssignedID")
+    var assignedID: String? = null,
+
+    @SerializedName("ProjectNo")
+    var projectNo: String? = null,
+
+    @SerializedName("SkipReason")
+    var skipReason: String? = null,
+
+    @SerializedName("KitId")
+    var kitId: String? = null,
+
+    @SerializedName("CartonNo")
+    var cartonNo: String? = null,
+
+    @SerializedName("IsDam")
+    var isDam: String? = null,
+
+    @SerializedName("HasDis")
+    var hasDis: String? = null,
+
+    @SerializedName("Lineno")
+    var lineno: String? = null,
+
+    @SerializedName("AccountId")
+    var accountId: String? = null,
+
+    @SerializedName("MCode")
+    var mCode: String? = null,
+
+    @SerializedName("MDescription")
+    var mDescription: String? = null,
+
+    @SerializedName("Qty")
+    var qty: String? = null,
+
+    @SerializedName("ToCartonNo")
+    var toCartonNo: String? = null,
+
+    @SerializedName("SODetailsID")
+    var soDetailsID: String? = null,
+
+    @SerializedName("SOHeaderID")
+    var soHeaderID: String? = null,
+
+    @SerializedName("POSOHeaderId")
+    var poSOHeaderId: String? = null,
+
+    @SerializedName("SkipQty")
+    var skipQty: String? = null,
+
+    @SerializedName("SLoc")
+    var sLoc: String? = null,
+
+    @SerializedName("VLPDNumber")
+    var vlpdNumber: String? = null,
+
+    @SerializedName("VLPDId")
+    var vlpdId: String? = null,
+
+    @SerializedName("LocationId")
+    var locationId: String? = null,
+
+    @SerializedName("CartonID")
+    var cartonID: String? = null,
+
+    @SerializedName("TransferRequestDetailsId")
+    var transferRequestDetailsId: String? = null,
+
+    @SerializedName("TransferRequestId")
+    var transferRequestId: String? = null,
+
+    @SerializedName("SLocId")
+    var sLocId: String? = null,
+
+    @SerializedName("StorageLocationID")
+    var storageLocationID: String? = null,
+
+    @SerializedName("PickedId")
+    var pickedId: String? = null,
+
+    @SerializedName("AccountID")
+    var accountID: String? = null,
+
+    @SerializedName("Vehicle")
+    var vehicle: String? = null,
+
+    @SerializedName("OBDNumber")
+    var obdNumber: String? = null,
+
+    @SerializedName("DriverName")
+    var driverName: String? = null,
+
+    @SerializedName("DriverNo")
+    var driverNo: String? = null,
+
+    @SerializedName("LRnumber")
+    var lrNumber: String? = null,
+
+    @SerializedName("TenatID")
+    var tenatID: String? = null,
+
+    @SerializedName("SONumber")
+    var soNumber: String? = null,
+
+    @SerializedName("PackedQty")
+    var packedQty: String? = null,
+
+    @SerializedName("CartonSerialNo")
+    var cartonSerialNo: String? = null,
+
+    @SerializedName("PSNID")
+    var psnID: String? = null,
+
+    @SerializedName("PSNDetailsID")
+    var psnDetailsID: String? = null,
+
+    @SerializedName("PackType")
+    var packType: String? = null,
+
+    @SerializedName("PackComplete")
+    var packComplete: String? = null,
+
+    @SerializedName("TotalSOCount")
+    var totalSOCount: String? = null,
+
+    @SerializedName("ScannedSOCount")
+    var scannedSOCount: String? = null,
+
+    @SerializedName("BusinessType")
+    var businessType: String? = null,
+
+    @SerializedName("LoadRefNo")
+    var loadRefNo: String? = null,
+
+    @SerializedName("CustomerName")
+    var customerName: String? = null,
+
+    @SerializedName("CustomerAddress")
+    var customerAddress: String? = null,
+
+    @SerializedName("WareHouseID")
+    var wareHouseID: String? = null,
+
+    @SerializedName("Status")
+    var status: String? = null,
+
+    @SerializedName("SOQty")
+    var soQty: String? = null,
+
+    @SerializedName("HUSize")
+    var huSize: String? = null,
+
+    @SerializedName("HUNo")
+    var huNo: String? = null,
+
+    @SerializedName("IsPicking")
+    var isPicking: String? = null,
+
+    @SerializedName("UOM")
+    var uom: String? = null,
+
+    @SerializedName("SortingQty")
+    var sortingQty: String? = null,
+
+    @SerializedName("PickSerialNumber")
+    var pickSerialNumber: String? = null,
+
+    @SerializedName("ScanResult")
+    var scanResult: Boolean? = null,
+
+    @SerializedName("ImageURL")
+    var imageURL: String? = null,
+
+    @SerializedName("IsCustomLabel")
+    var isCustomLabel: String? = null,
+
+    @SerializedName("ActiveStockDetailsId")
+    var activeStockDetailsId: Int? = null,
+
+    @SerializedName("IsShipmentClose")
+    var isShipmentClose: String? = null,
+
+    @SerializedName("MaterialCode")
+    var materialCode: String? = null,
+
+    @SerializedName("AvailableQuantity")
+    var availableQuantity: String? = null,
+
+    @SerializedName("TenantID")
+    var tenantID: String? = null,
+
+    @SerializedName("CustomerId")
+    var customerId: String? = null,
+
+    @SerializedName("InvoiceNumber")
+    var invoiceNumber: String? = null,
+
+    var isChecked: Boolean = false
+): Parcelable
+
+
+
+@Parcelize
+data class LoadDTO(
+    @SerializedName("VehicleNumber")
+    var vehicleNumber: String? = null,
+
+    @SerializedName("DockNumber")
+    var dockNumber: String? = null,
+
+    @SerializedName("BoxQty")
+    var boxQty: Double? = null,
+
+    @SerializedName("Volume")
+    var volume: Double? = null,
+
+    @SerializedName("Weight")
+    var weight: Double? = null,
+
+    @SerializedName("LoadSheetNumber")
+    var loadSheetNumber: String? = null,
+
+    @SerializedName("LoadedQuantity")
+    var loadedQuantity: String? = null,
+
+    @SerializedName("LoadSheetQuantity")
+    var loadSheetQuantity: String? = null,
+
+    @SerializedName("CustomerCode")
+    var customerCode: String? = null
+): Parcelable
+
+
 
 
 

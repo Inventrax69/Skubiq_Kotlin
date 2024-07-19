@@ -1,7 +1,0 @@
-
-Rkotlin:S1172Ğ"2Use "_" instead of these unused lambda parameters.(Ø€ç8 ïÁü1
-?kotlin:S6615n" Remove this useless initializer.(™Éûã8¤ïÁü1
-^kotlin:S6619½">Remove this useless non-null assertion !!, it always succeeds.(¯šÖØ8©ïÁü1
-Mkotlin:S108Š")Either remove or fill this block of code.(½ª¼•ûÿÿÿÿ8ÁïÁü1
-;kotlin:S6530“"Remove this unchecked cast.(Ë©ê—8ÉïÁü1
-rkotlin:S3776„"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(™³°Ä8ÚïÁü1

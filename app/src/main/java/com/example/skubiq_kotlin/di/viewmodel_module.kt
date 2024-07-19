@@ -2,6 +2,7 @@ package com.example.skubiq_kotlin.di
 
 import com.example.skubiq_kotlin.LoginSignupViewModel
 import com.example.skubiq_kotlin.viewmodels.InboundViewModel
+import com.example.skubiq_kotlin.viewmodels.OutboundViewModel
 import com.example.skubiq_kotlin.viewmodels.ScanViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -15,4 +16,6 @@ val viewModelModule = module {
     viewModel { LoginSignupViewModel(get()) }
     viewModel { InboundViewModel(get()) }
     viewModel { ScanViewModel(get()) }
+
+    viewModel { OutboundViewModel(get()) }
 }

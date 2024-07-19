@@ -111,6 +111,8 @@ class MainActivity : AppCompatActivity(){
                         getString(R.string.title_activity_goodsIn)
                 }
                 "putaway" -> navController.navigate(R.id.homeFragment)
+
+                "OBD Picking" -> navController.navigate(R.id.OBDPickingHeaderFragment)
             }
             binding.drawerLayout.closeDrawers()
             true

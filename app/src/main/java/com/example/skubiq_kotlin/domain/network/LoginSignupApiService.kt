@@ -37,4 +37,10 @@ interface LoginSignupApiService {
 
     @POST(ApiConstant.ApiGetStorageLocations)
     suspend fun getStorageLocations(@Body wmsCoreMessage: WMSCoreMessageRequest) : String
+
+    @POST(ApiConstant.ApiGetobdRefNos)
+    suspend fun getobdRefNos(@Body wmsCoreMessage: WMSCoreMessageRequest) : String
+
+
+
 }

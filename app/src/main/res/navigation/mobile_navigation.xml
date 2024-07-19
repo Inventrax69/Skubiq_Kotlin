@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_unloadingFragment"
             app:destination="@id/unloadingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_OBDPickingHeaderFragment"
+            app:destination="@id/OBDPickingHeaderFragment" />
     </fragment>
     <fragment
         android:id="@+id/unloadingFragment"
@@ -36,4 +39,19 @@
         android:name="com.example.skubiq_kotlin.view.fragments.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/OBDPickingHeaderFragment"
+        android:name="com.example.skubiq_kotlin.view.fragments.OBDPickingHeaderFragment"
+        android:label="OBDPickingHeaderFragment" >
+        <action
+            android:id="@+id/action_OBDPickingHeaderFragment_to_OBDPickingDetailsFragment"
+            app:destination="@id/OBDPickingDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/OBDPickingDetailsFragment"
+        android:name="com.example.skubiq_kotlin.view.fragments.OBDPickingDetailsFragment"
+        android:label="OBDPickingDetailsFragment" >
+    <argument android:name="outboundDetails"
+        app:argType="com.example.skubiq_kotlin.models.OutboundDTO"/>
+    </fragment>
 </navigation>

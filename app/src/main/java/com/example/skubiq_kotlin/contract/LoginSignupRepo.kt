@@ -23,4 +23,7 @@ interface LoginSignupRepo {
     suspend fun updateReceiveItemForHHT(updateListPRQ: WMSCoreMessageRequest) : Either<MyException, String>
 
     suspend fun getStorageLocations(storageListPRQ: WMSCoreMessageRequest) : Either<MyException, String>
+
+
+    suspend fun getobdRefNos(inboundListPRQ : WMSCoreMessageRequest) : Either<MyException, String>
 }

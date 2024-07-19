@@ -66,4 +66,13 @@ class LoginSignupApisRepository constructor(
             loginSignupApiService.getStorageLocations(storageListPRQ)
         }
     }
+
+
+    override suspend fun getobdRefNos(obdListPRQ: WMSCoreMessageRequest): Either<MyException, String> {
+        return either {
+            loginSignupApiService.getobdRefNos(obdListPRQ)
+        }
+    }
+
+
 }

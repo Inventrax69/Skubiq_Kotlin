@@ -109,6 +109,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUnloadingFragment())
            }
             binding.btnwarehouse.id -> getWarehouse()
+
+            binding.llPicking.id ->activity?.let {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOBDPickingHeaderFragment())
+            }
         }
 
     }
