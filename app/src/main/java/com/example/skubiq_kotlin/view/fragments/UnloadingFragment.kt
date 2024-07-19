@@ -95,7 +95,7 @@ class UnloadingFragment : Fragment() {
         userID = sharedPreferencesUtil?.getString("RefUserId", "")
         scanType = sharedPreferencesUtil?.getString("scanType", "")
         accountId = sharedPreferencesUtil?.getString("AccountId", "")
-        selectedWH = sharedPreferencesUtil?.getString("WarehouseID", "")
+        //selectedWH = sharedPreferencesUtil?.getString("WarehouseID", "")
         warehouseId = sharedPreferencesUtil?.getString("WarehouseID", "")
 
         common  = Common()
@@ -277,11 +277,13 @@ class UnloadingFragment : Fragment() {
                             binding.spinnerSelectStRef.setAdapter(arrayAdapter)
                         }
                     }catch (ex : Exception){
-                        Constants.hideProgressDialog()
+                        //Constants.hideProgressDialog()
+                        ProgressDialogUtils.closeProgressDialog()
                         Constants.showAlertDialog(requireActivity(), resources.getString(R.string.EMC_0173))
                     }
                 }else{
-                    Constants.hideProgressDialog()
+                    //Constants.hideProgressDialog()
+                    ProgressDialogUtils.closeProgressDialog()
                     Constants.showAlertDialog(requireActivity(), resources.getString(R.string.EMC_0173))
                 }
             }
@@ -325,7 +327,7 @@ class UnloadingFragment : Fragment() {
                 inboundId = oInbound.InboundID
                 invoiceQty = oInbound.InvoiceQty
                 receivedQty = oInbound.ReceivedQty
-                warehouseId = oInbound.WarehouseID
+               // warehouseId = oInbound.WarehouseID
                 tenantId = oInbound.TenantID
                 isCustomLabled = oInbound.IsCustomLabel
                 totalPalletCount = oInbound.TotalPalletNo

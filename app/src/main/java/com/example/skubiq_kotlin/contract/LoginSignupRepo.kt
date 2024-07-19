@@ -26,4 +26,6 @@ interface LoginSignupRepo {
 
 
     suspend fun getobdRefNos(inboundListPRQ : WMSCoreMessageRequest) : Either<MyException, String>
+
+    suspend fun getTenants(tenantsListPRQ : WMSCoreMessageRequest) : Either<MyException, String>
 }

@@ -43,4 +43,7 @@ interface LoginSignupApiService {
 
 
 
+
+    @POST(ApiConstant.ApiHouseKeepingDTO)
+    suspend fun getTenants(@Body wmsCoreMessage: WMSCoreMessageRequest) : String
 }

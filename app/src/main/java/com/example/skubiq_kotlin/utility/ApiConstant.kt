@@ -31,5 +31,7 @@ class ApiConstant {
 
         const val ApiGetobdRefNos = "Outbound/GetobdRefNos"
 
+        const val ApiHouseKeepingDTO = "HouseKeeping/GetTenants"
+
     }
 }

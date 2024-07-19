@@ -75,4 +75,10 @@ class LoginSignupApisRepository constructor(
     }
 
 
+
+    override suspend fun getTenants(tenantsListPRQ: WMSCoreMessageRequest): Either<MyException, String> {
+        return either {
+            loginSignupApiService.getTenants(tenantsListPRQ)
+        }
+    }
 }

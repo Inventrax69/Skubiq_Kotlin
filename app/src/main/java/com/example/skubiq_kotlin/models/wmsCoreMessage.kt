@@ -577,6 +577,24 @@ data class LoadDTO(
 ): Parcelable
 
 
+/*
+data class HouseKeepingDTO(
+
+    @SerializedName("AccountID") var AccountID : String? = null,
+    @SerializedName("TenantName") var TenantName : String? = null,
+    @SerializedName("TenantID") var TenantID : String? = null,
+    @SerializedName("Warehouse") var Warehouse : String? = null,
+    @SerializedName("WarehouseId") var WarehouseId : String? = null,
+    @SerializedName("CartonNo") var CartonNo : String? = null,
+    @SerializedName("Result") var Result : String? = null,
+    @SerializedName("UserId") var UserId : String? = null,
+    @SerializedName("Location") var Location : String? = null,
+    @SerializedName("MaterialCode") var MaterialCode : String? = null,
+    @SerializedName("TenantCode") var TenantCode : String? = null,
+    @SerializedName("IsCustomLabel") var IsCustomLabel : String? = null
+)
+*/
+
 
 
 

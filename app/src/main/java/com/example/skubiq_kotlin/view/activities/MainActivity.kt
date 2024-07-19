@@ -113,6 +113,12 @@ class MainActivity : AppCompatActivity(){
                 "putaway" -> navController.navigate(R.id.homeFragment)
 
                 "OBD Picking" -> navController.navigate(R.id.OBDPickingHeaderFragment)
+                "putaway" -> {
+                    navController.navigate(R.id.palletTransfersFragment)
+                    (this as AppCompatActivity?)!!.supportActionBar!!.title =
+                        getString(R.string.title_activity_pallet_transfer)
+
+                }
             }
             binding.drawerLayout.closeDrawers()
             true
